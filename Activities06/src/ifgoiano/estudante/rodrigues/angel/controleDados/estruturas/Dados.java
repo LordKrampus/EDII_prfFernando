@@ -1,0 +1,24 @@
+package ifgoiano.estudante.rodrigues.angel.controleDados.estruturas;
+
+import java.util.List;
+import java.util.ArrayList;
+
+public class Dados {
+    private static List<Integer> dados;
+
+    public Dados(){
+        this.dados = new ArrayList<>();
+    }
+
+    public List<Integer> getDados() {
+        return dados;
+    }
+
+    public void inserir(int valor) {
+        this.dados.add(valor);
+    }
+
+    public void novaLista(){
+        this.dados.clear();
+    }
+}
