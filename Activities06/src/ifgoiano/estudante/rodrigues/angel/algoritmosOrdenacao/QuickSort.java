@@ -7,12 +7,12 @@ public class QuickSort {
     }
 
     public static long realizar(Integer[] dados){
-        quicksort(dados, 0, dados.length -1);
-
+        quickSort(dados, 0, dados.length -1);
+        //quickSort2(dados, 0, dados.length -1);
         return iteracoes;
     }
 
-    private static void quicksort(Integer[] dados, int inicio, int fim){
+    private static void quickSort(Integer[] dados, int inicio, int fim){
         if(inicio >= fim) return;
 
         int pivo = inicio;
@@ -53,7 +53,36 @@ public class QuickSort {
             }
         }
 
-        quicksort(dados, inicio, pivo-1);
-        quicksort(dados, pivo+1, fim);
+        quickSort(dados, inicio, pivo-1);
+        quickSort(dados, pivo+1, fim);
+    }
+    
+    //segunda implementação,por subsidio de referencias de algoritmos do modelo escritos
+    private static void quickSort2(Integer[] dados, int inicio, int fim){
+        if(inicio >= fim) return;
+
+        int pivo = dados[inicio];
+        int indice = fim;
+        int auxiliar;
+        for(int i = fim; i > inicio; i--){
+            if(dados[i] > pivo){
+                swap(dados, i, indice);
+                indice--;
+
+                iteracoes++;
+            }
+        }
+        swap(dados, inicio, indice);
+
+        quickSort2(dados, inicio, indice-1);
+        quickSort2(dados, indice + 1, fim);
+
+        iteracoes++;
+    }
+
+    private static void swap(Integer[] dados, int indiceFrom, int indiceTo){
+        int aux = dados[indiceFrom];
+        dados[indiceFrom] = dados[indiceTo];
+        dados[indiceTo] = aux;
     }
 }
