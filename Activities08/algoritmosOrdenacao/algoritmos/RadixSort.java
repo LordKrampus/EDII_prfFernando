@@ -1,7 +1,6 @@
 package ifgoiano.estudante.rodrigues.angel.algoritmosOrdenacao.algoritmos;
 import java.util.Vector;
 
-//ainda não funciona
 public class RadixSort extends SortAlgorithm{
     private int maiorElemento;
     private int menorElemento;
