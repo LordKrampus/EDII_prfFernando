@@ -12,6 +12,7 @@ public class Binarytree_Teste {
     static BinaryTree bt;
     static StringBuilder sb;
     static byte modoBanceamento;
+    static MarcadorTemporal mt;
 
     public static StaticBalancing_Interface getModoInstancia(byte modo){
         if(modo == 1)
@@ -34,9 +35,12 @@ public class Binarytree_Teste {
             while(bt.hasElement(i)){
                 sb.append(i + ",");
                 //balanceando
+
+                mt.marcarInicio();
                 balancear(getModoInstancia(modoBanceamento));
                 //removendo
                 bt.remove(i);
+                mt.marcarFim();
             }
             i += basico;
         }
@@ -52,10 +56,13 @@ public class Binarytree_Teste {
         for(int i = 0; i < length; i++){
             while(bt.hasElement(espaco[i])){
                 sb.append(espaco[i] + ",");
+
+                mt.marcarInicio();
                 //balanceando
                 balancear(getModoInstancia(modoBanceamento));
                 //removendo
                 bt.remove(espaco[i]);
+                mt.marcarFim();
             }
         }
         System.out.println(sb.toString() + "}");
@@ -114,16 +121,19 @@ public class Binarytree_Teste {
     public static void main(String[] args) {
         bt = new BinaryTree();
         modoBanceamento = new Scanner(System.in).nextByte();
+        mt = new MarcadorTemporal();
 
         //    Criar uma árvore de inteiros com 5000 elementos criados aleatoriamente,
         //    com valores variando de 0 a 9999, e realize as seguintes operações:
         //    (A árvore deve estar balanceada antes de cada operação)
         int i;
         for (i = 0; i < 5000; i++) {
+            mt.marcarInicio();
             //balanceando
             balancear(getModoInstancia(modoBanceamento));
             //inserindo
             bt.insert(getRandBetween(0, 9999, bt));
+            mt.marcarFim();
         }
         imprimir(bt);
 
@@ -145,10 +155,12 @@ public class Binarytree_Teste {
         //problem
         System.out.println("c) Insira 100 números criados aleatoriamente na árvore e imprima a árvore em-ordem.");
         for (i = 0; i < 100; i++) {
+            mt.marcarInicio();
             //balanceando
             balancear(getModoInstancia(modoBanceamento));
             //inserindo
             bt.insert(getRandBetween(0,9999, bt));
+            mt.marcarFim();
         }
         imprimir(bt);
 
@@ -162,5 +174,9 @@ public class Binarytree_Teste {
 
         balancear(getModoInstancia(modoBanceamento));
         imprimir(bt);
+
+        System.out.println("\n\n" +
+                (modoBanceamento == 1? "algoritmo do Vetor": "algoritmo DSW") +
+                "\nSoma dos custos de tempo das operações conjuntas (ex., balancear e inserir):. " + mt.gerarCustoTotal() + "S");
     }
 }
